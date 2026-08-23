@@ -1,0 +1,1 @@
+not ok - singleton stopped beating after the refused restart (mtime stuck at 1787469469): the wedged-watcher shape the daemon crash-looped on

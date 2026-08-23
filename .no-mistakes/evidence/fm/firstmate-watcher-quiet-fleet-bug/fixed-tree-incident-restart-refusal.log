@@ -1,0 +1,6 @@
+== t0: singleton pid 89067, beat age 0s (grace 10s)
+== t+12s: beat age 3s (grace 10s) -> what the away daemon's restart child now sees:
+restart-child rc=0
+restart-child output: watcher: already running pid 89067
+== after refused restart: singleton beat age 3s
+singleton alive

@@ -1,0 +1,8 @@
+tests/.tmp-incident.full.sh: command substitution: line 4710: syntax error near unexpected token `-'
+tests/.tmp-incident.full.sh: command substitution: line 4710: ` (date +%s) - $(herdr_test_stat_mtime "$dir/state/.last-watcher-beat") '
+== t0: singleton pid 62575, beat age s (grace 10s)
+tests/.tmp-incident.full.sh: command substitution: line 4712: syntax error near unexpected token `-'
+tests/.tmp-incident.full.sh: command substitution: line 4712: ` (date +%s) - $(herdr_test_stat_mtime "$dir/state/.last-watcher-beat") '
+== t+12s: beat age s (grace 10s) -> what the away daemon's restart child now sees:
+restart-child rc=1
+restart-child output: watcher: lock held by live pid 62575 but heartbeat is stale for 13s (>10s); inspect or stop that watcher before re-arming.

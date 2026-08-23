@@ -1,0 +1,15 @@
+ok - fm_backend_herdr_wait_transition: a home with no herdr panes falls back to polling (rc 2)
+ok - fm_backend_herdr_wait_transition: below-capability protocol/schema falls back to polling (rc 2)
+ok - fm_backend_herdr_wait_transition: reconnect level-reconcile returns an uncommitted blocked pane
+ok - fm_backend_herdr_wait_transition: subscribes before reconnect level-reconcile
+ok - fm_backend_herdr_wait_transition: a still-blocked, already-escalated pane is not re-delivered on reconnect
+ok - fm_backend_herdr_wait_transition: a streamed ->blocked edge returns the record sub-poll
+ok - fm_backend_herdr_wait_transition: streamed working clears the marker, idle/done are deferred (clean timeout)
+ok - fm_backend_herdr_wait_transition: a reader/subscribe failure falls back to polling (rc 2)
+ok - fm_backend_herdr_wait_transition: Bash 3.2-safe bad-ack path closes fd 9 and removes its FIFO
+ok - fm_backend_herdr_wait_transition: stock macOS Bash clean timeout closes fd 9 and returns 1
+ok - fm_backend_herdr_wait_transition: a saturated event stream stays within its wait budget (quiet-fleet crash-loop regression)
+ok - fm_backend_herdr_wait_transition: stops its reader when the budget expires, never leaking it
+ok - bin/fm-watch.sh keeps touching state/.last-watcher-beat across saturated herdr event waits (quiet-fleet crash-loop regression)
+ok - a second bin/fm-watch.sh invocation refuses cleanly against a fresh-beat singleton (daemon restart crash-loop regression)
+ALL TARGETED HERDR TESTS PASSED

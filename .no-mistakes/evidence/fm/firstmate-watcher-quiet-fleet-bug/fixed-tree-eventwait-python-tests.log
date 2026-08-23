@@ -1,0 +1,11 @@
+test_deadline_is_clean_timeout (__main__.EventWaitReadLineTest.test_deadline_is_clean_timeout) ... ok
+test_main_does_not_signal_readiness_before_valid_ack (__main__.EventWaitReadLineTest.test_main_does_not_signal_readiness_before_valid_ack) ... ok
+test_main_reports_early_stream_closure (__main__.EventWaitReadLineTest.test_main_reports_early_stream_closure) ... ok
+test_main_saturated_stream_stays_within_budget (__main__.EventWaitReadLineTest.test_main_saturated_stream_stays_within_budget) ... ok
+test_peer_closure_is_runtime_failure (__main__.EventWaitReadLineTest.test_peer_closure_is_runtime_failure) ... ok
+test_receive_error_is_runtime_failure (__main__.EventWaitReadLineTest.test_receive_error_is_runtime_failure) ... ok
+
+----------------------------------------------------------------------
+Ran 6 tests in 2.191s
+
+OK
