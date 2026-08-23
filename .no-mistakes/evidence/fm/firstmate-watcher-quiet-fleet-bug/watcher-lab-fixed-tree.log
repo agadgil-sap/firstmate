@@ -1,0 +1,24 @@
+watcher pid=63202 poll=5s grace=300s saturating-stream=on
+t=0s beat_age=nones watcher_alive=yes
+t=5s beat_age=4s watcher_alive=yes
+t=10s beat_age=9s watcher_alive=yes
+t=15s beat_age=1s watcher_alive=yes
+t=20s beat_age=6s watcher_alive=yes
+t=25s beat_age=11s watcher_alive=yes
+t=30s beat_age=4s watcher_alive=yes
+t=35s beat_age=9s watcher_alive=yes
+t=40s beat_age=2s watcher_alive=yes
+t=45s beat_age=2s watcher_alive=yes
+RESTART_ATTEMPT[t=45s] rc=0 out=<<watcher: already running pid 63202>>
+t=52s beat_age=4s watcher_alive=yes
+t=57s beat_age=3s watcher_alive=yes
+t=62s beat_age=3s watcher_alive=yes
+t=67s beat_age=2s watcher_alive=yes
+t=72s beat_age=2s watcher_alive=yes
+t=77s beat_age=2s watcher_alive=yes
+t=83s beat_age=2s watcher_alive=yes
+t=88s beat_age=2s watcher_alive=yes
+t=93s beat_age=1s watcher_alive=yes
+t=98s beat_age=1s watcher_alive=yes
+FINAL leaked_stream_readers=0
+watcher stdout: 
