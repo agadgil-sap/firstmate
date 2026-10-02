@@ -242,11 +242,11 @@ test_an_owner_that_dies_during_startup_ends_the_command() {
 # the bounded command could run. This regression drives the whole call end to
 # end under set -u with the oldest bash on the machine - subshell, top level,
 # and the named-owner override - and pins the statuses the contract promises.
-# CI's newer bash always defines BASHPID, so there the same exercise still runs
-# but cannot itself reproduce the unset read; where the host has a bash without
-# BASHPID the teeth check proves that read really does fail under set -u.
+# The driver unsets BASHPID, so the call takes the library's fallback branch
+# even where the interpreter defines it, and a reintroduced bare read dies on
+# every host, CI's bash 5 included.
 test_the_call_runs_under_set_u_with_the_oldest_bash() {
-  local dir driver oldest candidate major minor score has_bashpid version
+  local dir driver oldest candidate major minor score version
   local rc=0 started elapsed gone
   dir="$TMP_ROOT/oldest-bash"
   mkdir -p "$dir"
@@ -265,21 +265,14 @@ test_the_call_runs_under_set_u_with_the_oldest_bash() {
   done
   [ -n "$oldest" ] || fail "no bash interpreter was found to exercise fm_exec_timed with"
   version=$("$oldest" -c 'printf "%s" "$BASH_VERSION"')
-  if "$oldest" -c 'set -u; [ -n "${BASHPID:-}" ]' >/dev/null 2>&1; then
-    has_bashpid=yes
-  else
-    has_bashpid=no
-    # Prove this interpreter really dies on the bare read, so the assertions
-    # below are known not to be vacuous on this host.
-    "$oldest" -c 'set -u; [ -n "$BASHPID" ]' >/dev/null 2>&1 \
-      && fail "$oldest lacks BASHPID yet a bare read under set -u succeeded"
-  fi
   cat >"$driver" <<'DRIVER'
 #!/usr/bin/env bash
-# One bounded fm_exec_timed call under set -u: subshell, override, or top
-# level; the harness asserts the statuses and the silence from outside.
+# One bounded fm_exec_timed call under set -u with BASHPID unset, the view a
+# stock macOS bash 3.2 has of every call: subshell, override, or top level;
+# the harness asserts the statuses and the silence from outside.
 set -u
 . "$1/bin/fm-timeout-lib.sh"
+unset BASHPID
 PATH=$2
 case $3 in
   subshell)
@@ -310,11 +303,7 @@ DRIVER
   "$oldest" "$driver" "$ROOT" "$PERL_ONLY" toplevel 2>"$dir/toplevel.err" || rc=$?
   [ "$rc" -eq 9 ] || fail "the top-level call under $oldest reported $rc, not the replaced shell's 9"
   [ ! -s "$dir/toplevel.err" ] || fail "the top-level call under $oldest leaked stderr: $(cat "$dir/toplevel.err")"
-  if [ "$has_bashpid" = yes ]; then
-    pass "fm_exec_timed runs under set -u with the oldest bash here (bash $version, which defines BASHPID): subshell, top level, and named-owner override"
-  else
-    pass "fm_exec_timed runs under set -u with the oldest bash here (bash $version, no BASHPID): subshell, top level, and named-owner override"
-  fi
+  pass "fm_exec_timed runs under set -u with BASHPID unset (bash $version, the oldest here): subshell, top level, and named-owner override"
 }
 
 # perl is preferred whenever it exists, because only its watchdog can reap a
