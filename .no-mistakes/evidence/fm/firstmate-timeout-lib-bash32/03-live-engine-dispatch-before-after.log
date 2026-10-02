@@ -1,0 +1,22 @@
+== Live product drive: fm_supervision_engine_turn (the crew-dispatch unit)
+== under the stock macOS bash , perl watchdog, from /Users/al-consulting/.no-mistakes/worktrees/bf51ff311f8c/01M3X3403CDJD6XQDRTA9AMBTQ
+
+===== 1. TARGET commit (guarded BASHPID read) =====
+engine-turn-rc=0
+error=0 cost=0.012345 conversation_cost=0.012345 input=120 cache_read=40 cache_write=10 output=64 turns=1
+engine ran (witness head):
+-p
+Inspect the repository and report.
+--safe-mode
+turn result: {"type":"result","subtype":"success","is_error":false,"total_cost_usd":0.012345,"num_turns":1,"usage":{"input_tokens":120,"cache_read_input_tokens":40,"cache_creation_input_tokens":10,"output_tokens":64}}
+errors.txt bytes: 0
+
+===== 2. BASE lib (the broken 2026-10-01 state) =====
+engine-turn-rc=1
+result-parse-rc=1
+engine witness: ABSENT - the engine never ran
+turn result: 
+errors.txt (the host's own diagnostics):
+/Users/al-consulting/.no-mistakes/worktrees/bf51ff311f8c/01M3X3403CDJD6XQDRTA9AMBTQ/bin/fm-timeout-lib.sh: line 224: BASHPID: unbound variable
+
+worktree restored: 0 modified files

@@ -1,0 +1,17 @@
+== CI-teeth drive under a from-source bash 5.2.0(1)-release (what ubuntu CI runs)
+
+===== 0. the teeth mechanism: unset BASHPID forces the fallback on bash 5 too =====
+    BASHPID defined: yes
+    after unset, bare read: /var/folders/wc/_50bb1355132178vhljk835w0000gp/T//fm-bash52.DYlpu4/bash-5.2/bash: line 1: BASHPID: unbound variable
+    (the bare read dies - exactly the view the driver gives the library)
+
+===== 1. TARGET commit: the regression driver under bash 5.2 =====
+subshell: rc=7 (demand 7), stderr: 0 bytes
+toplevel: rc=9 (demand 9), stderr: 0 bytes
+override (owner gone): rc=137, elapsed=1s (demand nonzero <30s), stderr: 0 bytes
+
+===== 2. BASE lib under bash 5.2: a reintroduced bare read still dies (the teeth) =====
+subshell: rc=1 (command never ran), stderr:
+    /Users/al-consulting/.no-mistakes/worktrees/bf51ff311f8c/01M3X3403CDJD6XQDRTA9AMBTQ/bin/fm-timeout-lib.sh: line 224: BASHPID: unbound variable
+
+worktree restored: 0 modified files

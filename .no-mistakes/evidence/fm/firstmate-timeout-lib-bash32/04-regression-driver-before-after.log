@@ -1,0 +1,15 @@
+== The new regression's own driver (extracted verbatim from tests/fm-timeout-lib.test.sh)
+== run by hand under /bin/bash 3.2.57(1)-release
+
+===== A. TARGET commit: driver passes all three cases =====
+subshell: rc=7 (demand 7), stderr: 0 bytes
+toplevel: rc=9 (demand 9), stderr: 0 bytes
+override (owner already gone): rc=137, elapsed=1s (demand nonzero <30s), stderr: 0 bytes
+
+===== B. BASE lib (bare $BASHPID read restored): driver dies before the command runs =====
+subshell: rc=1 (command never ran), stderr:
+    /Users/al-consulting/.no-mistakes/worktrees/bf51ff311f8c/01M3X3403CDJD6XQDRTA9AMBTQ/bin/fm-timeout-lib.sh: line 224: BASHPID: unbound variable
+toplevel: rc=1 (command never ran), stderr:
+    /Users/al-consulting/.no-mistakes/worktrees/bf51ff311f8c/01M3X3403CDJD6XQDRTA9AMBTQ/bin/fm-timeout-lib.sh: line 224: BASHPID: unbound variable
+
+worktree restored: 0 modified files
